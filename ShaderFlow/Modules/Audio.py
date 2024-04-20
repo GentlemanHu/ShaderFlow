@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any, Deque, Generator, Iterable, List, Optional, Self, Tuple
 
 import numpy
-import soundcard
+# import soundcard
 from attr import Factory, define, field
 from loguru import logger as log
 
