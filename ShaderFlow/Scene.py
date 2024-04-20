@@ -225,17 +225,17 @@ class ShaderScene(ShaderModule):
         Returns:
             Self: Fluent interface
         """
-        resolution = BrokenResolution.fitscar(self.width, self.height, width, height, 1, self._aspect_ratio)
+        # resolution = BrokenResolution.fitscar(self.width, self.height, width, height, 1, self._aspect_ratio)
 
-        if self.realtime:
-            resolution = tuple(map(min, resolution, self.monitor_resolution))
+        # if self.realtime:
+        #     resolution = tuple(map(min, resolution, self.monitor_resolution))
 
-        # Optimization: Only resize when resolution changes
-        if resolution != (self._width, self._height):
-            log.info(f"{self.who} Resizing window to resolution {resolution}")
-            self._width, self._height = resolution
-            self.opengl.screen.viewport = (0, 0, self.width, self.height)
-            self.window.size = resolution
+        # # Optimization: Only resize when resolution changes
+        # if resolution != (self._width, self._height):
+        #     log.info(f"{self.who} Resizing window to resolution {resolution}")
+        #     self._width, self._height = resolution
+        #     self.opengl.screen.viewport = (0, 0, self.width, self.height)
+        #     self.window.size = resolution
 
         return self
 
@@ -652,7 +652,8 @@ class ShaderScene(ShaderModule):
         self.rendering  = (render or benchmark or bool(output))
         self.realtime   = (not self.rendering)
         self.headless   = (self.rendering or self.benchmark)
-        self.fps        = (self.realtime*(fps or self.monitor_framerate) or 60.0)
+        # self.fps        = (self.realtime*(fps or self.monitor_framerate) or 60.0)
+        self.fps        = (self.realtime and (fps or self.monitor_framerate) or 60.0)
         self.quality    = quality
         self.time       = 0
         self.duration   = 0
