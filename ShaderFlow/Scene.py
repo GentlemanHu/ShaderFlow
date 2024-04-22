@@ -653,13 +653,16 @@ class ShaderScene(ShaderModule):
         self.realtime   = (not self.rendering)
         self.headless   = (self.rendering or self.benchmark)
         # self.fps        = (self.realtime*(fps or self.monitor_framerate) or 60.0)
-        self.fps        = (self.realtime and (fps or self.monitor_framerate) or 60.0)
+        self.fps        = fps #(self.realtime and (fps or self.monitor_framerate) or 60.0)
         self.quality    = quality
         self.time       = 0
         self.duration   = 0
         self.fullscreen = fullscreen
         self.title      = f"ShaderFlow | {self.__name__}"
 
+        #TODO - temp fix for headless width and height
+        self._width, self._height = width, height
+        
         # Maybe keep or force aspect ratio, and find best resolution
         self.aspect_ratio = eval((aspect or "0").replace(":", "/")) or self._aspect_ratio
         self.resolution = video_resolution = BrokenResolution.fitscar(
